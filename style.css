@@ -1,0 +1,133 @@
+/* RESET */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body{
+    background: #0f0f0f;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 60px;
+
+    background: #181818;
+}
+
+.logo{
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* HERO SECTION */
+.hero{
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1{
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.hero p{
+    color: #bbbbbb;
+    margin-bottom: 30px;
+}
+
+/* DOWNLOAD BOX */
+.download-box{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+.download-box input{
+    width: 500px;
+    padding: 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+.download-box button{
+    padding: 15px 25px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: red;
+    color: white;
+
+    cursor: pointer;
+}
+
+/* OPTIONS */
+.options{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.options select{
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* RESULT SECTION */
+.result{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 50px;
+}
+
+.card{
+    background: #1f1f1f;
+
+    padding: 20px;
+    border-radius: 15px;
+
+    width: 500px;
+}
+
+.card img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card h2{
+    margin: 20px 0;
+}
+
+.card button{
+    width: 100%;
+    padding: 15px;
+
+    background: red;
+    border: none;
+    border-radius: 10px;
+
+    color: white;
+    cursor: pointer;
+}
