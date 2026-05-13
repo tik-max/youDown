@@ -1,4 +1,50 @@
+import { useState } from 'react'
+
 export default function App() {
+
+  const [url, setUrl] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [response, setResponse] = useState(null)
+
+  const analyzeVideo = async () => {
+
+    if (!url) {
+      alert('Please enter YouTube URL')
+      return
+    }
+
+    try {
+
+      setLoading(true)
+
+      const res = await fetch(
+        'https://YOUR-RENDER-URL.onrender.com/api/analyze',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url }),
+        }
+      )
+
+      const data = await res.json()
+
+      setResponse(data)
+
+    } catch (error) {
+
+      console.log(error)
+
+      alert('Server Error')
+
+    } finally {
+
+      setLoading(false)
+
+    }
+
+  }
 
   return (
 
@@ -11,15 +57,9 @@ export default function App() {
           YT Downloader
         </h1>
 
-        <nav className="flex gap-6 text-gray-300">
-          <a href="#">Home</a>
-          <a href="#">Features</a>
-          <a href="#">About</a>
-        </nav>
-
       </header>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="flex flex-col items-center justify-center text-center py-24 px-6">
 
         <h2 className="text-6xl font-black max-w-4xl leading-tight">
@@ -27,74 +67,51 @@ export default function App() {
         </h2>
 
         <p className="text-gray-400 mt-6 text-lg">
-          Fast, modern and beautiful downloader experience
+          Fast modern downloader experience
         </p>
 
-        {/* URL BOX */}
+        {/* INPUT */}
         <div className="flex gap-4 mt-10 w-full max-w-3xl">
 
           <input
             type="text"
             placeholder="Paste YouTube URL..."
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
             className="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-5 py-4 outline-none"
           />
 
-          <button className="bg-red-600 hover:bg-red-500 px-8 rounded-xl font-semibold">
-            Analyze
+          <button
+            onClick={analyzeVideo}
+            className="bg-red-600 hover:bg-red-500 px-8 rounded-xl font-semibold"
+          >
+
+            {loading ? 'Loading...' : 'Analyze'}
+
           </button>
 
         </div>
 
-        {/* OPTIONS */}
-        <div className="flex gap-6 mt-8">
+        {/* RESPONSE */}
+        {response && (
 
-          <select className="bg-gray-900 border border-gray-700 rounded-xl px-5 py-3">
-            <option>MP4 Video</option>
-            <option>MP3 Audio</option>
-          </select>
+          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 mt-10 w-full max-w-2xl">
 
-          <select className="bg-gray-900 border border-gray-700 rounded-xl px-5 py-3">
-            <option>1080p</option>
-            <option>720p</option>
-            <option>480p</option>
-          </select>
+            <h3 className="text-2xl font-bold text-green-400">
+              Backend Connected Successfully
+            </h3>
 
-        </div>
+            <p className="mt-4 text-gray-300 break-all">
+              {response.url}
+            </p>
 
-      </section>
-
-      {/* RESULT CARD */}
-      <section className="flex justify-center px-6 pb-20">
-
-        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-2xl w-full">
-
-          <img
-            src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?q=80&w=1200"
-            alt="thumbnail"
-            className="rounded-2xl w-full h-80 object-cover"
-          />
-
-          <h3 className="text-2xl font-bold mt-6">
-            Chill Music Playlist
-          </h3>
-
-          <p className="text-gray-400 mt-2">
-            52 videos • HD Quality
-          </p>
-
-          <div className="flex gap-4 mt-6">
-
-            <button className="flex-1 bg-red-600 hover:bg-red-500 py-4 rounded-xl font-semibold">
-              Download MP4
-            </button>
-
-            <button className="flex-1 bg-gray-800 hover:bg-gray-700 py-4 rounded-xl font-semibold">
-              Download MP3
-            </button>
+            <p className="mt-2 text-gray-400">
+              {response.message}
+            </p>
 
           </div>
 
-        </div>
+        )}
 
       </section>
 
