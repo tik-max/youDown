@@ -18,7 +18,7 @@ export default function App() {
       setLoading(true)
 
       const res = await fetch(
-        'https://YOUR-RENDER-URL.onrender.com/api/analyze',
+        'https://youdown-i0y2.onrender.com',
         {
           method: 'POST',
           headers: {
