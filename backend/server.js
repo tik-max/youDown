@@ -21,6 +21,30 @@ app.use('/api', downloadRoutes)
 
 const PORT = process.env.PORT || 5000
 
+import { exec } from 'child_process'
+
+app.get('/test-ffmpeg', (req, res) => {
+
+    exec('ffmpeg -version', (error, stdout, stderr) => {
+
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'FFmpeg not installed',
+                error: error.message
+            })
+        }
+
+        res.json({
+            success: true,
+            message: 'FFmpeg installed successfully',
+            data: stdout
+        })
+
+    })
+
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
