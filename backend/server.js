@@ -45,6 +45,28 @@ app.get('/test-ffmpeg', (req, res) => {
 
 })
 
+app.get('/test-ytdlp', (req, res) => {
+
+    exec('yt-dlp --version', (error, stdout, stderr) => {
+
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'yt-dlp not installed',
+                error: error.message
+            })
+        }
+
+        res.json({
+            success: true,
+            message: 'yt-dlp installed successfully',
+            version: stdout
+        })
+
+    })
+
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
